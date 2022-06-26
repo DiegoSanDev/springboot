@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import br.com.sandev.cadastro.cliente.application.controller.representation.ClientRepresentation;
-import br.com.sandev.cadastro.cliente.application.controller.validator.ClientRepresentationValidator;
+import static br.com.sandev.cadastro.cliente.application.controller.validator.ClientRepresentationValidator.validateFieldsRequired;
 import br.com.sandev.cadastro.cliente.application.mapper.ClientMapper;
 import br.com.sandev.cadastro.cliente.domain.service.ClientService;
 import lombok.RequiredArgsConstructor;
@@ -24,14 +24,13 @@ public class ClientController {
 
 	@PostMapping
 	public ResponseEntity<ClientRepresentation> save(@RequestBody ClientRepresentation clientRepresentation) {
-
-		ClientRepresentationValidator.validateFieldsRequired(clientRepresentation);
-
+		
+		validateFieldsRequired(clientRepresentation);
 		var client = clientService.save(ClientMapper.representationToDomain(clientRepresentation));
-
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}").buildAndExpand(client.getId())
-				.toUri();
-
+		
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
+				.buildAndExpand(client.getId()).toUri();
+		
 		return ResponseEntity.created(uri).body(ClientMapper.domainToRepresentation(client));
 	}
 

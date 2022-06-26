@@ -24,22 +24,19 @@ public class ClientRepresentationValidator {
 
 	private void validateName(String name) {
 		if (nonFieldValid(name)) {
-			throw new FieldsRequiredException(
-					createErrorMessage(FIELD_REQUIRED, DETAIL_NAME_REQUIRED, CODE_FIELD_REQUIRED));
+			createFieldsRequiredException(DETAIL_NAME_REQUIRED);
 		}
 	}
 
 	private void validateEmail(String email) {
 		if (nonFieldValid(email)) {
-			throw new FieldsRequiredException(
-					createErrorMessage(FIELD_REQUIRED, DETAIL_EMAIL_REQUIRED, CODE_FIELD_REQUIRED));
+			createFieldsRequiredException(DETAIL_EMAIL_REQUIRED);
 		}
 	}
-	
+
 	private void validateDocument(String document) {
 		if (nonFieldValid(document)) {
-			throw new FieldsRequiredException(
-					createErrorMessage(FIELD_REQUIRED, DETAIL_DOCUMENT_REQUIRED, CODE_FIELD_REQUIRED));
+			createFieldsRequiredException(DETAIL_DOCUMENT_REQUIRED);
 		}
 	}
 
@@ -49,6 +46,10 @@ public class ClientRepresentationValidator {
 
 	private ErrorMessage createErrorMessage(String error, String detail, int code) {
 		return ErrorMessage.builder().code(code).details(detail).error(error).build();
+	}
+
+	private void createFieldsRequiredException(String detail) {
+		throw new FieldsRequiredException(createErrorMessage(FIELD_REQUIRED, detail, CODE_FIELD_REQUIRED));
 	}
 
 }

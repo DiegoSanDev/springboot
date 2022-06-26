@@ -25,7 +25,7 @@ public class Client implements Serializable {
 	private Long id;
 	private String name;
 	private String document;
-	private String RG;
+	private String rg;
 	private LocalDate birthDate;
 	private String email;
 	private Address address;

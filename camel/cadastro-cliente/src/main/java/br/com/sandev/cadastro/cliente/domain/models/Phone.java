@@ -21,7 +21,7 @@ public class Phone implements Serializable {
 
 	@EqualsAndHashCode.Include
 	private Long id;
-	private String DDD;
+	private String ddd;
 	private String number;
 
 }

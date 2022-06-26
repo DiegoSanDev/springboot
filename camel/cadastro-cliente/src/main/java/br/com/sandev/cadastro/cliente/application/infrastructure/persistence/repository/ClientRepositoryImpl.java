@@ -1,5 +1,6 @@
 package br.com.sandev.cadastro.cliente.application.infrastructure.persistence.repository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -7,6 +8,8 @@ import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
+import br.com.sandev.cadastro.cliente.application.infrastructure.persistence.entity.ClientEntity;
+import br.com.sandev.cadastro.cliente.application.mapper.ClientMapper;
 import br.com.sandev.cadastro.cliente.domain.models.Client;
 import br.com.sandev.cadastro.cliente.domain.port.ClientRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,20 +25,27 @@ public class ClientRepositoryImpl implements ClientRepository {
 	@Override
 	@Transactional(rollbackOn = Exception.class)
 	public Client save(Client client) {
-		// TODO Auto-generated method stub
-		return null;
+
+		var clientEntity = ClientEntity.builder().build();
+
+		try {
+			clientEntity = repository.save(ClientMapper.toEntity(client));
+		} catch (Exception e) {
+			log.error("Error in save client.", e);
+			throw e;
+		}
+
+		return ClientMapper.entityToDomain(clientEntity);
 	}
 
 	@Override
 	public Optional<Client> getById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return Optional.empty();
 	}
 
 	@Override
 	public List<Optional<Client>> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return Collections.emptyList();
 	}
 
 }

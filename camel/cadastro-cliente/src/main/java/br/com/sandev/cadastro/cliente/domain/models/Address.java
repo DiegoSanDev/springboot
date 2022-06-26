@@ -22,7 +22,7 @@ public class Address implements Serializable {
 	
     @EqualsAndHashCode.Include
 	private Long id;
-	private String CEP;
+	private String cep;
 	private StateType stateType;
 	private String city;
 	private String streatt;

@@ -6,19 +6,19 @@ import br.com.sandev.cadastro.cliente.application.controller.representation.Erro
 import lombok.Getter;
 
 @Getter
-public class FieldsRequiredException extends RuntimeException implements Serializable{
-	
+public class FieldsRequiredException extends RuntimeException implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
-	private ErrorMessage errorMessage;
-	
+
+	private final ErrorMessage errorMessage;
+
 	public FieldsRequiredException() {
 		super();
 		errorMessage = null;
 	}
-	
+
 	public FieldsRequiredException(ErrorMessage errorMessage) {
 		this.errorMessage = errorMessage;
 	}
-	
+
 }
